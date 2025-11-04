@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>FocusFlow — Document reader</title>
+  <link rel="stylesheet" href="assets/styles.css"/>
+</head>
+<body class="theme-dark">
+  <header class="nav">
+    <div class="logo">Focus<span>Flow</span></div>
+    <nav>
+      <a href="dashboard.html" class="btn btn-outline">Back to dashboard</a>
+    </nav>
+  </header>
+
+  <main class="reader">
+    <section class="panel">
+      <h2>Open a document</h2>
+      <p>Upload PDFs or text files. We’ll track open time and your completion estimate.</p>
+      <input type="file" id="fileInput" accept=".pdf,.txt,.md"/>
+      <div id="fileMeta" class="file-meta hidden"></div>
+      <div class="reader-controls hidden" id="readerControls">
+        <button class="btn btn-primary" id="startReading">Start reading</button>
+        <button class="btn btn-outline" id="pauseReading">Pause</button>
+        <button class="btn btn-outline" id="finishReading">Finish</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Document content</h2>
+      <iframe id="pdfFrame" class="doc-frame hidden"></iframe>
+      <pre id="textContent" class="text-frame hidden"></pre>
+    </section>
+
+    <section class="panel">
+      <h2>Reading stats</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <h3>Open time</h3>
+          <p><span id="openTime">0</span> min</p>
+        </div>
+        <div class="stat-card">
+          <h3>Active reading</h3>
+          <p><span id="activeTime">0</span> min</p>
+        </div>
+        <div class="stat-card">
+          <h3>Estimated completion</h3>
+          <p><span id="eta">—</span></p>
+        </div>
+      </div>
+      <div class="notify">
+        <button class="btn btn-primary" id="notifyStart">Notify me to start</button>
+        <button class="btn btn-outline" id="notifyBreak">Remind me for a break</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>We count open time continuously and active time only while “Start reading” is running.</p>
+  </footer>
+
+  <script src="assets/utils.js"></script>
+  <script src="assets/reader.js"></script>
+</body>
+</html>
