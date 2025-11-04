@@ -1,106 +1,76 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FocusFlow — Study smarter</title>
-  <link rel="stylesheet" href="assets/styles.css"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body class="theme-dark">
-  <header class="nav">
-    <div class="logo">Focus<span>Flow</span></div>
+<body>
+  <canvas id="bg3d"></canvas>
+
+  <header class="navbar">
+    <a class="logo" href="index.html">FocusFlow</a>
     <nav>
-      <a href="login.html" class="btn btn-outline">Login</a>
-      <a href="login.html#signup" class="btn btn-primary">Get started</a>
+      <a href="index.html" class="active">Home</a>
+      <a href="features.html">Features</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </header>
 
-  <main class="hero">
-    <div class="hero-copy">
-      <h1>Own your day. <span class="accent">Beat your deadlines.</span></h1>
-      <p>Tasks, classes, assignments, and study timer — in one place. Beautiful. Fast. Yours.</p>
-      <div class="cta">
-        <a href="login.html" class="btn btn-primary btn-lg">Enter your flow</a>
-        <a href="#features" class="btn btn-outline btn-lg">Explore features</a>
+  <main>
+    <section class="hero">
+      <h1 class="fx-3d">Own your day. Beat your deadlines.</h1>
+      <p>Tasks, classes, notes, deadlines — everything in one place. Beautiful. Fast. Yours.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="dashboard.html">Get started</a>
+        <a class="btn btn-outline" href="features.html">Explore features</a>
       </div>
+    </section>
 
-      <div class="stats">
-        <div class="stat">
-          <div class="stat-num">3x</div>
-          <div class="stat-label">More focused sessions</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">40%</div>
-          <div class="stat-label">Fewer missed deadlines</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">100%</div>
-          <div class="stat-label">You, in control</div>
-        </div>
+    <section class="highlight">
+      <div class="tile tilt">
+        <h3>3×</h3><p>More focused sessions</p>
       </div>
-    </div>
+      <div class="tile tilt">
+        <h3>40%</h3><p>Fewer missed deadlines</p>
+      </div>
+      <div class="tile tilt">
+        <h3>You</h3><p>In control</p>
+      </div>
+    </section>
 
-    <!-- 3D animated cube using CSS transforms -->
-    <div class="hero-3d">
-      <div class="cube">
-        <div class="face front">Plan</div>
-        <div class="face back">Focus</div>
-        <div class="face right">Track</div>
-        <div class="face left">Grow</div>
-        <div class="face top">Flow</div>
-        <div class="face bottom">Rest</div>
-      </div>
-      <div class="orb"></div>
-    </div>
+    <section class="features-grid">
+      <article class="feature-card flip">
+        <div class="flip-inner">
+          <div class="flip-front">📅 Calendar</div>
+          <div class="flip-back">Plan classes and deadlines with ease.</div>
+        </div>
+      </article>
+      <article class="feature-card flip">
+        <div class="flip-inner">
+          <div class="flip-front">⏱ Focus Timer</div>
+          <div class="flip-back">Pomodoro sessions with gentle breaks.</div>
+        </div>
+      </article>
+      <article class="feature-card flip">
+        <div class="flip-inner">
+          <div class="flip-front">📝 Notes</div>
+          <div class="flip-back">Keep everything organized and searchable.</div>
+        </div>
+      </article>
+    </section>
   </main>
 
-  <section id="features" class="features">
-    <h2>Everything you need to study smarter</h2>
-    <div class="grid-3">
-      <div class="card">
-        <h3>Daily To‑Do</h3>
-        <p>Prioritized tasks with streaks and gentle reminders.</p>
-      </div>
-      <div class="card">
-        <h3>Class Organizer</h3>
-        <p>Your timetable, color‑coded and conflict‑aware.</p>
-      </div>
-      <div class="card">
-        <h3>Assignments</h3>
-        <p>Deadlines tracked, nudges sent, panic avoided.</p>
-      </div>
-      <div class="card">
-        <h3>Pomodoro</h3>
-        <p>Work in cycles, breathe between battles.</p>
-      </div>
-      <div class="card">
-        <h3>Progress</h3>
-        <p>Visual dashboard for motivation — not guilt.</p>
-      </div>
-      <div class="card">
-        <h3>Doc Reader</h3>
-        <p>Open, read, and auto‑track time per file.</p>
-      </div>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <p>© FocusFlow — Built for college students who care about their time.</p>
+  <footer>
+    <span>© FocusFlow</span><span>Beautiful. Fast. Yours.</span>
   </footer>
 
-  <script src="assets/utils.js"></script>
-  <script>
-    // Parallax tilt on hero based on mouse
-    const hero = document.querySelector('.hero-3d');
-    hero.addEventListener('mousemove', (e) => {
-      const rect = hero.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-      document.querySelector('.cube').style.transform =
-        rotateX(${(-y*20)}deg) rotateY(${(x*30)}deg) translateZ(0);
-    });
-  </script>
+  <script src="js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <script src="js/three-bg.js"></script>
 </body>
 </html>
