@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact — FocusFlow</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <canvas id="bg3d"></canvas>
+
+  <header class="navbar">
+    <a class="logo" href="index.html">FocusFlow</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="features.html">Features</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-head">
+      <h1 class="fx-3d">Say hello</h1>
+      <p>Questions, feedback, or ideas — we’d love to hear them.</p>
+    </section>
+
+    <section class="contact-form card">
+      <form id="contactForm">
+        <div class="row">
+          <input type="text" name="name" placeholder="Your name" required />
+          <input type="email" name="email" placeholder="Your email" required />
+        </div>
+        <textarea name="message" rows="5" placeholder="Your message" required></textarea>
+        <button class="btn btn-primary" type="submit">Send</button>
+      </form>
+      <p class="muted" id="contactStatus"></p>
+    </section>
+  </main>
+
+  <footer>
+    <span>© FocusFlow</span><span>Beautiful. Fast. Yours.</span>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <script src="js/three-bg.js"></script>
+</body>
+</html>
