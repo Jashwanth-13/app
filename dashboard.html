@@ -1,124 +1,110 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>FocusFlow — Dashboard</title>
-  <link rel="stylesheet" href="assets/styles.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard — FocusFlow</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body class="theme-dark">
-  <header class="nav">
-    <div class="logo">Focus<span>Flow</span></div>
+<body>
+  <canvas id="bg3d"></canvas>
+
+  <header class="navbar">
+    <a class="logo" href="index.html">FocusFlow</a>
     <nav>
-      <a href="reader.html" class="btn btn-outline">Document reader</a>
-      <button id="logoutBtn" class="btn btn-outline">Logout</button>
+      <a href="index.html">Home</a>
+      <a href="features.html">Features</a>
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </header>
 
-  <main class="grid-2">
-    <!-- Left column: Tasks and Timer -->
-    <section class="panel">
-      <h2>Daily To‑Do</h2>
-      <form id="todoForm" class="inline-form">
-        <input type="text" name="title" placeholder="Add a task..." required/>
-        <select name="priority">
-          <option value="low">Low</option>
-          <option value="medium" selected>Medium</option>
-          <option value="high">High</option>
-        </select>
-        <button class="btn btn-primary" type="submit">Add</button>
-      </form>
-      <ul id="todoList" class="list"></ul>
-
-      <div class="divider"></div>
-
-      <h2>Pomodoro</h2>
-      <div class="pomodoro">
-        <div class="pom-display">
-          <span id="pomMinutes">25</span>:<span id="pomSeconds">00</span>
-        </div>
-        <div class="pom-controls">
-          <button class="btn btn-primary" id="pomStart">Start</button>
-          <button class="btn btn-outline" id="pomPause">Pause</button>
-          <button class="btn btn-outline" id="pomReset">Reset</button>
-          <select id="pomMode">
-            <option value="work" selected>Work (25)</option>
-            <option value="short">Short Break (5)</option>
-            <option value="long">Long Break (15)</option>
-          </select>
-        </div>
-        <div class="pom-stats">
-          <div><strong>Completed cycles:</strong> <span id="pomCycles">0</span></div>
-          <div><strong>Today focus time:</strong> <span id="focusMinutes">0</span> min</div>
-        </div>
+  <main>
+    <section class="topbar">
+      <div>
+        <h1>Good morning! Ready to make today productive?</h1>
+        <p class="muted" id="dateDisplay"></p>
       </div>
     </section>
 
-    <!-- Right column: Schedule, Assignments, Dashboard -->
-    <section class="panel">
-      <h2>Class schedule organizer</h2>
-      <form id="classForm" class="inline-form">
-        <input type="text" name="course" placeholder="Course e.g., Physics 101" required/>
-        <input type="text" name="day" placeholder="Day e.g., Mon" required/>
-        <input type="time" name="start" required/>
-        <input type="time" name="end" required/>
-        <button class="btn btn-primary" type="submit">Add</button>
-      </form>
-      <ul id="classList" class="list"></ul>
+    <section class="kpis">
+      <article class="card kpi kpi-orange">
+        <h3>Tasks due today</h3>
+        <p class="kpi-value" id="tasksToday">4</p>
+        <div class="kpi-bar"><span id="tasksProgress" style="width:60%"></span></div>
+        <p class="muted kpi-caption">60% completed</p>
+      </article>
+      <article class="card kpi kpi-green">
+        <h3>Study hours this week</h3>
+        <p class="kpi-value" id="studyHours">18.5h</p>
+        <div class="kpi-bar"><span style="width:74%"></span></div>
+        <p class="muted">On track</p>
+      </article>
+      <article class="card kpi kpi-purple">
+        <h3>Current GPA</h3>
+        <p class="kpi-value" id="gpa">3.87</p>
+        <div class="kpi-bar"><span style="width:87%"></span></div>
+        <p class="muted">Keep it up</p>
+      </article>
+      <article class="card kpi kpi-yellow">
+        <h3>Next study break</h3>
+        <p class="kpi-value" id="nextBreak">12 days</p>
+        <div class="kpi-bar"><span style="width:20%"></span></div>
+        <p class="muted">Plan a mini‑reset</p>
+      </article>
+    </section>
 
-      <div class="divider"></div>
-
-      <h2>Assignments & deadlines</h2>
-      <form id="assignForm" class="inline-form">
-        <input type="text" name="title" placeholder="Assignment title" required/>
-        <input type="date" name="due" required/>
-        <select name="subject">
-          <option>General</option>
-          <option>Math</option>
-          <option>CS</option>
-          <option>Physics</option>
-          <option>Humanities</option>
-        </select>
-        <button class="btn btn-primary" type="submit">Track</button>
-      </form>
-      <ul id="assignList" class="list"></ul>
-
-      <div class="divider"></div>
-
-      <h2>Progress dashboard</h2>
-      <div class="progress-grid">
-        <div class="progress-card">
-          <h3>Tasks</h3>
-          <div class="meter"><div id="taskMeter" class="bar"></div></div>
-          <small><span id="tasksDone">0</span> / <span id="tasksTotal">0</span> done</small>
+    <section class="two-col">
+      <article class="card list">
+        <div class="card-header">
+          <h3>Daily to‑do</h3>
+          <button class="btn btn-ghost" id="addTaskBtn">Add</button>
         </div>
-        <div class="progress-card">
-          <h3>Deadlines</h3>
-          <div class="meter"><div id="deadlineMeter" class="bar"></div></div>
-          <small>Upcoming: <span id="upcomingCount">0</span></small>
+        <ul class="items" id="taskList">
+          <li class="item"><label><input type="checkbox" /> Complete Physics Lab Report</label><span class="tag tag-red">Due today</span></li>
+          <li class="item"><label><input type="checkbox" /> Attend Math Lecture</label><span class="tag">10:00 AM</span></li>
+          <li class="item"><label><input type="checkbox" /> Revise Chemistry Notes</label><span class="tag tag-blue">Focus block</span></li>
+          <li class="item"><label><input type="checkbox" /> Work on History Essay</label><span class="tag">Draft</span></li>
+        </ul>
+      </article>
+
+      <article class="card list">
+        <div class="card-header">
+          <h3>Upcoming events</h3>
+          <a class="btn btn-ghost" href="#">View calendar</a>
         </div>
-        <div class="progress-card">
-          <h3>Focus</h3>
-          <div class="meter"><div id="focusMeter" class="bar"></div></div>
-          <small>Today: <span id="focusTotal">0</span> min</small>
-        </div>
+        <ul class="items" id="eventsList">
+          <li class="item"><span>📌 Physics Midterm</span><span class="tag tag-red">Fri</span></li>
+          <li class="item"><span>👥 Group Project Meeting</span><span class="tag tag-blue">Tomorrow</span></li>
+          <li class="item"><span>📝 Assignment: Algorithms</span><span class="tag">Next week</span></li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="card focus-timer">
+      <div>
+        <h3>Focus timer</h3>
+        <p class="muted">Stay in flow. Take mindful breaks.</p>
       </div>
-
-      <div class="divider"></div>
-
-      <h2>Motivation & tips</h2>
-      <div class="motivation">
-        <div class="video-list" id="videoList"></div>
-        <div class="tips" id="tipsList"></div>
+      <div class="timer-box">
+        <div class="timer-display" id="timerDisplay">25:00</div>
+        <div class="timer-actions">
+          <button class="btn btn-primary" id="startTimer">Start</button>
+          <button class="btn btn-outline" id="pauseTimer">Pause</button>
+          <button class="btn btn-ghost" id="resetTimer">Reset</button>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <p>Document reader tracks reading time and nudges you when it’s time to start — open it from the top right.</p>
+  <footer>
+    <span>© FocusFlow</span><span>Beautiful. Fast. Yours.</span>
   </footer>
 
-  <script src="assets/utils.js"></script>
-  <script src="assets/app.js"></script>
+  <script src="js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <script src="js/three-bg.js"></script>
 </body>
 </html>
