@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>FocusFlow — Dashboard</title>
+  <link rel="stylesheet" href="assets/styles.css"/>
+</head>
+<body class="theme-dark">
+  <header class="nav">
+    <div class="logo">Focus<span>Flow</span></div>
+    <nav>
+      <a href="reader.html" class="btn btn-outline">Document reader</a>
+      <button id="logoutBtn" class="btn btn-outline">Logout</button>
+    </nav>
+  </header>
+
+  <main class="grid-2">
+    <!-- Left column: Tasks and Timer -->
+    <section class="panel">
+      <h2>Daily To‑Do</h2>
+      <form id="todoForm" class="inline-form">
+        <input type="text" name="title" placeholder="Add a task..." required/>
+        <select name="priority">
+          <option value="low">Low</option>
+          <option value="medium" selected>Medium</option>
+          <option value="high">High</option>
+        </select>
+        <button class="btn btn-primary" type="submit">Add</button>
+      </form>
+      <ul id="todoList" class="list"></ul>
+
+      <div class="divider"></div>
+
+      <h2>Pomodoro</h2>
+      <div class="pomodoro">
+        <div class="pom-display">
+          <span id="pomMinutes">25</span>:<span id="pomSeconds">00</span>
+        </div>
+        <div class="pom-controls">
+          <button class="btn btn-primary" id="pomStart">Start</button>
+          <button class="btn btn-outline" id="pomPause">Pause</button>
+          <button class="btn btn-outline" id="pomReset">Reset</button>
+          <select id="pomMode">
+            <option value="work" selected>Work (25)</option>
+            <option value="short">Short Break (5)</option>
+            <option value="long">Long Break (15)</option>
+          </select>
+        </div>
+        <div class="pom-stats">
+          <div><strong>Completed cycles:</strong> <span id="pomCycles">0</span></div>
+          <div><strong>Today focus time:</strong> <span id="focusMinutes">0</span> min</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right column: Schedule, Assignments, Dashboard -->
+    <section class="panel">
+      <h2>Class schedule organizer</h2>
+      <form id="classForm" class="inline-form">
+        <input type="text" name="course" placeholder="Course e.g., Physics 101" required/>
+        <input type="text" name="day" placeholder="Day e.g., Mon" required/>
+        <input type="time" name="start" required/>
+        <input type="time" name="end" required/>
+        <button class="btn btn-primary" type="submit">Add</button>
+      </form>
+      <ul id="classList" class="list"></ul>
+
+      <div class="divider"></div>
+
+      <h2>Assignments & deadlines</h2>
+      <form id="assignForm" class="inline-form">
+        <input type="text" name="title" placeholder="Assignment title" required/>
+        <input type="date" name="due" required/>
+        <select name="subject">
+          <option>General</option>
+          <option>Math</option>
+          <option>CS</option>
+          <option>Physics</option>
+          <option>Humanities</option>
+        </select>
+        <button class="btn btn-primary" type="submit">Track</button>
+      </form>
+      <ul id="assignList" class="list"></ul>
+
+      <div class="divider"></div>
+
+      <h2>Progress dashboard</h2>
+      <div class="progress-grid">
+        <div class="progress-card">
+          <h3>Tasks</h3>
+          <div class="meter"><div id="taskMeter" class="bar"></div></div>
+          <small><span id="tasksDone">0</span> / <span id="tasksTotal">0</span> done</small>
+        </div>
+        <div class="progress-card">
+          <h3>Deadlines</h3>
+          <div class="meter"><div id="deadlineMeter" class="bar"></div></div>
+          <small>Upcoming: <span id="upcomingCount">0</span></small>
+        </div>
+        <div class="progress-card">
+          <h3>Focus</h3>
+          <div class="meter"><div id="focusMeter" class="bar"></div></div>
+          <small>Today: <span id="focusTotal">0</span> min</small>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <h2>Motivation & tips</h2>
+      <div class="motivation">
+        <div class="video-list" id="videoList"></div>
+        <div class="tips" id="tipsList"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Document reader tracks reading time and nudges you when it’s time to start — open it from the top right.</p>
+  </footer>
+
+  <script src="assets/utils.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
